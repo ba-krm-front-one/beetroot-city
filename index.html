@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Наш Маленький Город - Beetroot City</title>
+    <!--
+       ТУТ МЫ ПОДКЛЮЧАЕМ ВСЕ ОПИСАНИЯ НАШИХ СТРОЕНИЙ - ДРУГИМИ СЛОВАМИ МЫ ПОДКЛЮЧАЕМ ВСЕ КЛАССЫ
+       ОБРАТИТЕ ВНИМАНИЕ НА "defer" В ПОДКЛЮЧЕНИИИ СКРИПТА - PowerGenerator,ElectroStation И SolarPanel JS ФАЙЛЫ
+       СОДЕРЖАТ ВЗАИМОЗАВИСЯЩИЕ КЛАССЫ НО НЕ ВЫПОЛНЯЮТ НИКАКИХ ДЕЙСТВИЙ. ИМЕННО ПОЭТОМУ ТУТ И ПРИМЕНЯЕТСЯ defer.
+       МЫ НЕ МОЖЕМ ПРИМЕНИТЬ async Т.К. ElectroStation И SolarPanel ЗАВИСЯТ ОТ PowerGenerator И ЕСЛИ ОНИ ЗАГРУЗЯТСЯ
+       РАНЬШЕ ЧЕМ  PowerGenerator ТО ПРОИЗОЙДЕТ ОШИБКА
+     -->
+    <script src="js/buildings/PowerGenerator.js" defer></script>
+    <script src="js/buildings/ElectroStation.js" defer></script>
+    <script src="js/buildings/SolarPanel.js" defer></script>
+    <!--
+       ОБРАТИТЕ ВНИМАНИЕ НА "async" В ПОДКЛЮЧЕНИИИ СКРИПТА - House, BuildingsFactory и data JS ФАЙЛЫ, КОТОРЫЕ МЫ ПОДКЛЮЧАЕМ,
+       ТОЛЬКО СОДЕРЖАТ КЛАССЫ ИЛИ ДАННЫЕ НО НЕ ВЫПОЛНЯЮТ НИКАКИХ ДЕЙСТВИЙ И НЕ ЗАВИСЯТ ДРУГ ОТ ДРУГА. НО МЫ НЕ ИСПОЛЬЗУЕМ ЗДЕЬ "async"
+       (Т.Е. НЕ ГРУЗИМ СКРИПТЫ ОДНОВРЕМЕННО И В ЛЮБОМ ПОРЯДКЕ) ПООТМУ ЧТО В НИЗУ СТРАНИЦЫ У НАС ЕСТЬ ПОДКЛЮЧЕНИЕ utils/app.js
+       ТАК ВОТ, ЕСЛИ МЫ ВОСПОЛЬЗУЕМСЯ  "async", А НЕ  "defer" ТО У НАС utils/app.js СКАЧАЕТСЯ РАНЬШЕ, ЧЕМ BuildingsFactory
+       ИЛИ data.js И ПРОИЗОЙДЕТ ОШИБКА. ДРУГИМИ СЛОВАМИ utils/app.js ЗАВИСИТ ОТ ВСЕХ НАШИХ ФАЙЛОВ И ПОЭТОМУ МЫ НЕ ПРИМЕНЯЕМ
+       "async"
+    -->
+    <script src="js/buildings/House.js" defer></script>
+    <script src="js/utils/BuildingsFactory.js" defer></script>
+    <script src="js/buildings-definition/data.js" defer></script>
+</head>
+<body>
+    <main>
+        <!-- ЭТО БЛОК В КОТОРОМ У НАС БУДУТ ОТОБРАЖАТЬСЯ ДОМА -->
+        <ul id="houses">
+
+        </ul>
+        <!-- ЭТО БЛОК В КОТОРОМ У НАС БУДУТ ОТОБРАЖАТЬСЯ ПАНЕЛИ -->
+        <ul id="panels">
+
+        </ul>
+        <!-- ЭТО БЛОК В КОТОРОМ У НАС БУДУТ ОТОБРАЖАТЬСЯ СТАНЦИИ  -->
+        <ul id="stations">
+
+        </ul>
+    </main>
+    <!-- -->
+    <script src="js/utils/app.js" defer></script>
+</body>
+</html>
